@@ -1,14 +1,36 @@
 #!/bin/bash
 
-input="url.txt"
+input_filename="url.txt"
+proxy=""
 
-if [ "$1" == "proxy" ]; then
-    proxy="--proxy socks5://127.0.0.1:1080"
-    echo Info: Proxy ON $proxy
+while getopts ":pf:" opt; do
+    case $opt in
+        p)
+            proxy="--proxy socks5://127.0.0.1:1080"
+            ;;
+        f)
+            filename="$OPTARG"
+            if [[ -n "$filename" && -f "$filename" ]]; then
+                input_filename="$filename"
+            else
+                echo "Error: File '$filename' does not exist."
+                exit 1
+            fi
+            ;;
+        \?)
+            echo "Invalid option: -$OPTARG" >&2
+            exit 1
+            ;;
+    esac
+done
+
+if [[ -z $proxy ]]; then
+    echo Info: proxy off
 else
-    proxy=""
-    echo Info: Proxy OFF
+    echo Info: proxy on: $proxy
 fi
+
+echo Info: input filename: $input_filename
 
 comm_arg_array=("-N 4" "$proxy" "--abort-on-error" "--download-archive ./archive.txt" "-S ext:mp4:m4a" "-o %(title).200B.%(ext)s")
 comm_arg="${comm_arg_array[*]}"
@@ -29,4 +51,4 @@ do
         fi
     fi
 
-done < "$input"
+done < "$input_filename"
