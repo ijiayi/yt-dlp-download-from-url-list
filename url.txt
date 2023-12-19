@@ -1,0 +1,4 @@
+# comments starts with a #
+# <url> [<output path>]
+https://www.youtube.com/watch?v=ql6mhhHCldY AirPods Pro
+https://www.youtube.com/watch?v=fVW8-px4Ufw
