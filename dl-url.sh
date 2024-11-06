@@ -7,7 +7,7 @@ comm_arg_array=()
 comm_arg_array+=(-N 4 --abort-on-error --download-archive ./archive.txt -S ext:mp4:m4a -o "%(title).200B.%(ext)s")
 comm_arg_array+=(--user-agent "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36")
 
-while getopts ":puf:" opt; do
+while getopts ":pgan:f:i:" opt; do
     case $opt in
         p)
             proxy="--proxy socks5://127.0.0.1:1080"
@@ -21,6 +21,20 @@ while getopts ":puf:" opt; do
                 echo "Error: File '$filename' does not exist."
                 exit 1
             fi
+            ;;
+        i)
+            playlist_item="$OPTARG"
+            comm_arg_array+=(--playlist-items "$playlist_item")
+            ;;
+        a)
+            comm_arg_array+=(--no-abort-on-error)
+            ;;
+        g)
+            comm_arg_array+=(--ignore-errors)
+            ;;
+        n)
+            concurrent="$OPTARG"
+            comm_arg_array+=(--concurrent-fragments "$concurrent")
             ;;
         \?)
             echo "Invalid option: -$OPTARG" >&2
