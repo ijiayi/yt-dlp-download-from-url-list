@@ -7,7 +7,7 @@ comm_arg_array=()
 comm_arg_array+=(-N 4 --abort-on-error --download-archive ./archive.txt -S ext:mp4:m4a -o "%(title).200B.%(ext)s")
 comm_arg_array+=(--user-agent "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36")
 
-while getopts ":pgan:f:i:r:" opt; do
+while getopts ":pgacn:f:i:r:" opt; do
     case $opt in
         p)
             proxy="--proxy socks5://127.0.0.1:1080"
@@ -28,6 +28,9 @@ while getopts ":pgan:f:i:r:" opt; do
             ;;
         a)
             comm_arg_array+=(--no-abort-on-error)
+            ;;
+        c)
+            ignore_task_error=1
             ;;
         g)
             comm_arg_array+=(--ignore-errors)
@@ -66,10 +69,12 @@ do
 
         exit_code=$?
         if [[ $exit_code -ne 0 ]]; then
-            echo "Error: Command failed with exit code $exit_code" >&2
-            echo "URL: $url"
-            echo "Output path: $out_path"
-            exit 1
+            if [[ $ignore_task_error -ne 1 ]]; then
+                echo "Error: Command failed with exit code $exit_code" >&2
+                echo "URL: $url"
+                echo "Output path: $out_path"
+                exit 1
+            fi
         fi
     fi
 
