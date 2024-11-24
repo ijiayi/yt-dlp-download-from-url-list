@@ -7,7 +7,7 @@ comm_arg_array=()
 comm_arg_array+=(-N 4 --abort-on-error --download-archive ./archive.txt -S ext:mp4:m4a -o "%(title).200B.%(ext)s")
 comm_arg_array+=(--user-agent "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36")
 
-while getopts ":pgan:f:i:" opt; do
+while getopts ":pgan:f:i:r:" opt; do
     case $opt in
         p)
             proxy="--proxy socks5://127.0.0.1:1080"
@@ -35,6 +35,10 @@ while getopts ":pgan:f:i:" opt; do
         n)
             concurrent="$OPTARG"
             comm_arg_array+=(--concurrent-fragments "$concurrent")
+            ;;
+        r)
+            limit_rate="$OPTARG"
+            comm_arg_array+=(--limit-rate "$limit_rate")
             ;;
         \?)
             echo "Invalid option: -$OPTARG" >&2
