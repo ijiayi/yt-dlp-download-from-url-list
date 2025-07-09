@@ -1,0 +1,5 @@
+# comments starts with a #
+# <url> [<output path>]
+https://www.youtube.com/watch?v=pmyBHUIrQic Mac Mirrored
+https://www.youtube.com/watch?v=D-UGw9c-H64
+https://www.youtube.com/watch?v=dl-po6sw55E
