@@ -1,5 +1,6 @@
-# comments starts with a #
-# <url> [<output path>]
-https://www.youtube.com/watch?v=pmyBHUIrQic Mac Mirrored
-https://www.youtube.com/watch?v=D-UGw9c-H64
+# Lines starting with '#' are comments
+# Format: <url> [<output_path>]
+
+https://www.youtube.com/watch?v=pmyBHUIrQic Mac Mirrored  # Example with custom output path
+https://www.youtube.com/watch?v=D-UGw9c-H64              # Example with default output path
 https://www.youtube.com/watch?v=dl-po6sw55E
