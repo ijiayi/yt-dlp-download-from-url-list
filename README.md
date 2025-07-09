@@ -27,7 +27,7 @@ A Bash script that downloads videos from a list of URLs using yt-dlp with custom
 | `-p` | Enable SOCKS5 proxy (127.0.0.1:1080) | `./dl-url.sh -p` |
 | `-f <file>` | Specify input file (default: url.txt) | `./dl-url.sh -f my-urls.txt` |
 | `-i <items>` | Download specific playlist items | `./dl-url.sh -i "1-5,10"` |
-| `-a` | Disable abort on error | `./dl-url.sh -a` |
+| `-a` | Enable abort on error | `./dl-url.sh -a` |
 | `-c` | Continue on task errors | `./dl-url.sh -c` |
 | `-g` | Ignore all errors | `./dl-url.sh -g` |
 | `-n <num>` | Set concurrent fragments | `./dl-url.sh -n 8` |
@@ -68,8 +68,8 @@ https://www.youtube.com/playlist?list=example3 Playlists/Educational
 # Download specific playlist items with error tolerance
 ./dl-url.sh -i "1-10" -g
 
-# High-speed download with concurrent fragments
-./dl-url.sh -n 16 -c
+# High-speed download with abort on error
+./dl-url.sh -n 16 -a
 ```
 
 ## Requirements
@@ -87,8 +87,8 @@ https://www.youtube.com/playlist?list=example3 Playlists/Educational
 
 The script provides multiple levels of error handling:
 
-1. **Default**: Stops on first error
-2. **`-a` flag**: Continues downloading other URLs after errors
+1. **Default**: Continues downloading other URLs after errors
+2. **`-a` flag**: Stops on first error (abort on error)
 3. **`-c` flag**: Ignores task-level errors completely
 4. **`-g` flag**: Ignores all yt-dlp errors
 
