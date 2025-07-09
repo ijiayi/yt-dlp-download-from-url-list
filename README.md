@@ -95,7 +95,7 @@ The script provides multiple levels of error handling:
 ## Files
 
 - `dl-url.sh` - Main download script
-- `url.txt` - Default URL list file
+- `url.txt` - Default URL list file (rename or copy from `url.sample.txt`)
 - `archive.txt` - Download history (auto-generated)
 
 ## Reference
